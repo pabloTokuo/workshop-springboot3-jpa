@@ -1,5 +1,6 @@
 package com.springcourse.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -18,6 +19,7 @@ public class User implements Serializable {
     private String phone;
     private String password;
 
+    @JsonIgnore
     // Ligando a lista com o client
     @OneToMany(mappedBy = "client") // Um para muitos
     private List<Order> orders = new ArrayList<>();
