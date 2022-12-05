@@ -1,9 +1,15 @@
 package com.springcourse.course.entities;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
+@Table(name = "tb_user")
 public class User implements Serializable {
+    @Id // Primary Key no banco de dados
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Atualizar automaticamente o ID no banco de dados
     private Long id;
     private String name;
     private String email;
