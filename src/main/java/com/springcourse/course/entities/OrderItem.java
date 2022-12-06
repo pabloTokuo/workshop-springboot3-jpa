@@ -1,10 +1,12 @@
 package com.springcourse.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.springcourse.course.entities.pk.OrderItemPK;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -13,7 +15,7 @@ import java.util.Objects;
 public class OrderItem implements Serializable {
 
     @EmbeddedId
-    private OrderItemPK id;
+    private final OrderItemPK id = new OrderItemPK();
 
     private Integer quantity;
     private Double price;
@@ -21,12 +23,14 @@ public class OrderItem implements Serializable {
     public OrderItem(){}
 
     public OrderItem(Order order, Product product, Integer quantity, Double price) {
+        super();
         id.setOrder(order);
         id.setProduct(product);
         this.quantity = quantity;
         this.price = price;
     }
 
+    @JsonIgnore // Para não ficar repetindo os pedidos
     public Order getOrder() {
         return id.getOrder();
     }
