@@ -33,8 +33,17 @@ public class UserResource {
     @PostMapping // Insert annotation
     public ResponseEntity<User> insert(@RequestBody User obj) {
         obj = service.insert(obj);
+        // Objeto do tipo URI
+        // Requisao HTTP 201 para mostrar que foi CRIADO
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).body(obj);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    // VOID pq a resposta dessa requisicao n vai retornar nenhum "corpo"
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
