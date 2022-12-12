@@ -28,6 +28,10 @@ public class Order implements Serializable {
     @JoinColumn(name = "client_id")
     private User client;
 
+    // ID.ORDER PQ O ORDERITEM TEM O ATRIBUTO ID
+    // E ESSE ATRIBUTO ID DO TIPO ORDERITEMPK
+    // TEM POR SUA VEZ O ORDER
+    // POR ISSO ID.ORDER
     @OneToMany(mappedBy = "id.order")
     private Set<OrderItem> items = new HashSet<>();
 
